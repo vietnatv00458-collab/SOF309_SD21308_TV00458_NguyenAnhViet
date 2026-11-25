@@ -18,11 +18,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
         <selenium.version>4.20.0</selenium.version>
+        <mockito.version>5.11.0</mockito.version>
     </properties>
 
     <dependencies>
         <!-- ============================================== -->
         <!-- [Y3] JUNIT 5 TESTING FRAMEWORK                -->
+        <!-- (đã gồm junit-jupiter-params cho @ParameterizedTest/@CsvSource) -->
         <!-- ============================================== -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -30,6 +32,36 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- [Y3] MOCKITO: giả lập HttpServletRequest/Response và các DAO -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ============================================== -->
+        <!-- Thư viện để biên dịch code web (Controller/DAO/Entity) -->
+        <!-- ============================================== -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <!-- Nếu build báo thiếu package org.hibernate.* (do JPAUtil), bỏ comment dòng dưới:
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.4.4.Final</version>
+        </dependency>
+        -->
 
         <!-- ============================================== -->
         <!-- [Y4] SELENIUM WEBDRIVER CHO UI AUTOMATION     -->
@@ -40,8 +72,6 @@
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- (Tùy chọn) Web Server & DB cũ của sinh viên có thể dán thêm vào đây -->
     </dependencies>
 
     <build>
@@ -66,4 +96,3 @@
         </plugins>
     </build>
 </project>
-
